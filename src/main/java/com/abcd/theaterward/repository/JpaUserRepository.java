@@ -24,23 +24,23 @@ public class JpaUserRepository implements UserRepository {
     }
 
     @Override
-    public long dupe(String userId) {
+    public long dupe(String id) {
         String jpql = "SELECT COUNT(users) " +
                 "FROM Users users " +
-                "WHERE users.userId = :userId";
+                "WHERE users.id = :id";
 
         return em.createQuery(jpql, long.class)
-                .setParameter("userId", userId)
+                .setParameter("id", id)
                 .getSingleResult();
     }
 
     @Override
-    public Users findById(String userId) {
+    public Users findById(String id) {
         String jpql = "SELECT u FROM Users u"
-                + "WHERE u.userId = :userId";
+                + " WHERE u.id = :id";
 
         return em.createQuery(jpql,Users.class)
-                .setParameter("userId", userId)
+                .setParameter("id", id)
                 .getSingleResult();
     }
 }
